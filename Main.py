@@ -13,6 +13,8 @@ clearConsole()
 
 import datetime
 from tkinter import *
+from  tkinter import ttk
+
 
 class Students:
     def __init__(self,stt, name, age, className, toan, van, anh):
@@ -84,9 +86,9 @@ def LayHocSinh():
 #         LayHocSinh()
 
 screen = Tk()
-screen.geometry("1000x500")
-screen.maxsize(1000, 500)
-screen.minsize(1000, 500)
+screen.geometry("950x500")
+screen.maxsize(950, 450)
+screen.minsize(950, 450)
 screen.title("Phần mềm quản lí học sinh trường L")
 
 #Row 0
@@ -94,19 +96,61 @@ titleLabel = Label(screen)
 titleLabel.grid(columnspan = "13", row = "0", padx=5, pady=5)
 titleLabel.config(text = "QUẢN LÍ HỌC SINH", font=("Segoe UI bold",15))
 
-#Row 1
-screenDisplay = Label(screen, borderwidth = 2, width= 100, height=10)
-screenDisplay.grid(columnspan= "13", row = "1", padx=40, pady=5)
-screenDisplay.config(text="Code ngu quá nên cái này sắp làm được nè", relief=GROOVE, justify="center", font=("Segoe UI",12))
+#Table row 1
 
+game_frame = Frame(screen)
+game_frame.grid(columnspan = "13", row = "1", padx=(30,0), pady=5)
+
+tableData = ttk.Treeview(game_frame)
+
+tableData['columns'] = ('stt', 'name', 'class', 'age', 'toan', 'van', 'anh', 'diemTB')
+
+tableData.column("#0", width=0,  stretch=NO)
+tableData.column("stt",anchor=CENTER, width=70)
+tableData.column("name",anchor=CENTER, width=200)
+tableData.column("class",anchor=CENTER, width=100)
+tableData.column("age",anchor=CENTER, width=100)
+tableData.column("toan",anchor=CENTER, width=100)
+tableData.column("van",anchor=CENTER, width=100)
+tableData.column("anh",anchor=CENTER, width=100)
+tableData.column("diemTB",anchor=CENTER, width=100)
+
+
+tableData.heading("#0",text="",anchor=CENTER)
+tableData.heading("stt",text="STT",anchor=CENTER)
+tableData.heading("name",text="Tên",anchor=CENTER)
+tableData.heading("class",text="Lớp",anchor=CENTER)
+tableData.heading("age",text="Tuổi",anchor=CENTER)
+tableData.heading("toan",text="Điểm Toán",anchor=CENTER)
+tableData.heading("van",text="Điểm Văn",anchor=CENTER)
+tableData.heading("anh",text="Điểm Anh",anchor=CENTER)
+tableData.heading("diemTB",text="Điểm TB",anchor=CENTER)
+
+tableData.insert(parent='', index='end', iid=0, text='',
+values=(1, 'Nguyễn Văn A', 'Lớp 1', '20', '10', '10', '10', '10'))
+
+def insertData():
+    stt =sttEntry.get()
+    HocSinh[stt].name = nameEntry.get()
+    HocSinh[stt].age = ageEntry.get()
+    HocSinh[stt].className = classEntry.get()
+    HocSinh[stt].toan = toanEntry.get()
+    HocSinh[stt].van = vanEntry.get()
+    HocSinh[stt].anh = anhEntry.get()
+    HocSinh[stt].tinhTrungBinh()
+    tableData.insert(parent='',index='end',iid=stt,text='',
+    values=(HocSinh[stt].stt, str(HocSinh[stt].name), HocSinh[stt].className, HocSinh[stt].age, HocSinh[stt].toan, HocSinh[stt].van, HocSinh[stt].anh, HocSinh[stt].tinhTrungBinh()))
+
+tableData.grid(row=1, column=0, columnspan=5, rowspan=5, padx=5, pady=5)
+        
 #Row 2
 searchButton = Button(screen, width=7)
 searchButton.grid(column = "0", row = "2", padx=(35,0), pady=(7,0))
 searchButton.config(text="Search", font=("Segoe UI",12), relief=GROOVE, justify="center")
 
-inputButton = Button(screen, width=7,)
-inputButton.grid(column = "1", row = "2", padx=0, pady=(7,0))
-inputButton.config(text="Input", font=("Segoe UI",12), relief=GROOVE, justify="center")
+sttEntry = Entry(screen, width= "7")
+sttEntry.grid(column = "1", row = "2", padx=0, pady=(7,0))
+sttEntry.config(text="Stt", font=("Segoe UI",12), relief=GROOVE, justify="center")
 
 nameEntry = Entry(screen, width= "25")
 nameEntry.grid(column = "2", row = "2", padx=0, pady=(7,0))
@@ -137,9 +181,9 @@ clearLabel = Button(screen, width= "7")
 clearLabel.grid(column = "0", row = "3", padx=(35,0), pady=(7,0))
 clearLabel.config(text="Clear", font=("Segoe UI",12), relief=GROOVE, justify="center")
 
-sttLabel = Entry(screen, width= "7")
-sttLabel.grid(column = "1", row = "3", padx=0, pady=(7,0))
-sttLabel.config(text="Stt", font=("Segoe UI",12), relief=GROOVE, justify="center")
+inputButton = Button(screen, width=7,)
+inputButton.grid(column = "1", row = "3", padx=0, pady=(7,0))
+inputButton.config(text="Input", font=("Segoe UI",12), relief=GROOVE, justify="center", command = insertData)
 
 nameLabel = Label(screen, width= "25")
 nameLabel.grid(column = "2", row = "3", padx=0, pady=(7,0))
@@ -164,5 +208,10 @@ vanLabel.config(text="Văn", font=("Segoe UI",12), relief=GROOVE, justify="cente
 anhLabel = Label(screen, width= 10)
 anhLabel.grid(column = "7", row = "3", padx=0, pady=(7,0))
 anhLabel.config(text="Anh", font=("Segoe UI",12), relief=GROOVE, justify="center")
+
+#CopyRight Label
+copyRightLabel = Label(screen)
+copyRightLabel.grid(columnspan = "13", row = "4", padx=(35,0), pady=(30,0))
+copyRightLabel.config(text="Copyright © Khoa Nguyễn, supported by Copilot!", font=("Segoe UI light",10),bd="0", relief=GROOVE, justify="center")
 
 screen.mainloop()

@@ -97,7 +97,7 @@ titleLabel.config(text = "QUẢN LÍ HỌC SINH", font=("Segoe UI bold",15))
 #Row 1
 screenDisplay = Label(screen, borderwidth = 2, width= 100, height=10)
 screenDisplay.grid(columnspan= "13", row = "1", padx=40, pady=5)
-screenDisplay.config(text="Code ngu quá nên cái này chưa làm được nè", relief=GROOVE, justify="center", font=("Segoe UI",12))
+screenDisplay.config(text="Code ngu quá nên cái này sắp làm được nè", relief=GROOVE, justify="center", font=("Segoe UI",12))
 
 #Row 2
 searchButton = Button(screen, width=7)

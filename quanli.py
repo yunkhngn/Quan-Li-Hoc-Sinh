@@ -14,7 +14,7 @@
 import datetime
 from tkinter import *
 from  tkinter import ttk
-import json
+from tkinter import messagebox
 import webbrowser
 
 class Students:
@@ -91,6 +91,7 @@ global count
 count=0
 def openURL():
     webbrowser.open_new(r"https://www.facebook.com/fb.khoanguyen")
+    messagebox.showinfo('Hỏi cl?', 'Hỏi gì? Hỏi cl tao đéo trả lời đâu!')
 def dtb():
         return round(float(float(toan_entry.get())+float(van_entry.get())+float(anh_entry.get()))/3,2)
 def inputData():
@@ -100,20 +101,13 @@ def inputData():
    
     tableData.insert(parent='',index='end',iid = count,text='',values=(stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()))
     count += 1
-
-   
-    stt_entry.delete(0,END)
-    name_entry.delete(0,END)
-    class_entry.delete(0,END)
-    age_entry.delete(0,END)
-    toan_entry.delete(0,END)
-    van_entry.delete(0,END)
-    anh_entry.delete(0,END)
+def deleteData():
+    messagebox.askyesno('Ditmemay ấn cl', 'Cái này chưa code ấn cl à, code giúp tao với?')
 
 Input_frame = Frame(screen)
 Input_frame.grid(columnspan = "13", row = "2", padx=(20,0), pady=0)
 
-menuLabel = Label(Input_frame, text = "Menu", font=("Segoe UI Bold",15))
+menuLabel = Label(Input_frame, text = "MENU", font=("Segoe UI Bold",10))
 menuLabel.grid(columnspan = "13", row = "2", padx=5, pady=5)
 
 stt = Label(Input_frame,text="STT")
@@ -164,10 +158,10 @@ Input_button.grid(row=4,column=7,columnspan=2,padx=5,pady=0)
 Export_button = Button(Input_frame,width = 10, text = "Export", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2)
 Export_button.grid(row=5,column=7,columnspan=2,padx=0,pady=5)
 
-Search_button = Button(Input_frame,width = 10, text = "Search", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2)
+Search_button = Button(Input_frame,width = 10, text = "Search", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command=deleteData)
 Search_button.grid(row=5,column=5,columnspan=2,padx=0,pady=5)
 
-Clear_button = Button(Input_frame,width = 10, text = "Clear", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2)
+Clear_button = Button(Input_frame,width = 10, text = "Clear", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command=deleteData)
 Clear_button.grid(row=5,column=3,columnspan=3,padx=0,pady=5)
 
 Gethelp_button = Button(Input_frame,width = 10, text = "Get help?", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command=openURL)

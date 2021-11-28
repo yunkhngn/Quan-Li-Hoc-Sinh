@@ -18,6 +18,7 @@ from tkinter import messagebox
 import webbrowser
 import numpy
 import csv
+import tkinter.filedialog as filedialog
 
 class Students:
     def __init__(self,stt, name, age, className, toan, van, anh):
@@ -131,18 +132,18 @@ def ExportData():
 def LoadData():
     global data, tableData, count
     count = 0
-    if os.path.exists('./data.csv'):
-        with open('data.csv', 'r', newline='') as file:
-            CSVdata = csv.reader(file, delimiter=',')
-            for rows in CSVdata:
-                data.append(rows)
-            data.pop(0)
+
+    path = filedialog.askopenfile()
+
+    with open(path.name, 'r', newline='') as file:
+        CSVdata = csv.reader(file, delimiter=',')
+        for rows in CSVdata:
+            data.append(rows)
+        data.pop(0)
         
-        for i in data:
-            tableData.insert(parent='',index='end',iid = count,text='',values=(i[0], i[1],i[2] ,i[3], i[4], i[5], i[6], i[7]))
-            count +=1
-    else:
-        return
+    for i in data:
+        tableData.insert(parent='',index='end',iid = count,text='',values=(i[0], i[1],i[2] ,i[3], i[4], i[5], i[6], i[7]))
+        count +=1
 
 def deleteData():
     messagebox.askyesno('Ditmemay ấn cl', 'Cái này chưa code ấn cl à, code giúp tao với?')

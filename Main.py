@@ -6,10 +6,10 @@
 #        fuc: tính điểm trung bình 
 #             tính năm sinh 
 
-import os
-clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
-clearConsole()
-#Clear console cho nó gọn
+# import os
+# clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+# clearConsole()
+# #Clear console cho nó gọn
 
 import datetime
 from tkinter import *
@@ -127,7 +127,7 @@ tableData.heading("anh",text="Điểm Anh",anchor=CENTER)
 tableData.heading("diemTB",text="Điểm TB",anchor=CENTER)
 
 tableData.insert(parent='', index='end', iid=0, text='',
-values=(1, 'Nguyễn Văn A', 'Lớp 1', '20', '10', '10', '10', '10'))
+values=(1, 'Nguyễn Minh Đức', 'Lớp 11D0', '12', '10', '10', '10', '10'))
 
 def insertData():
     stt =sttEntry.get()

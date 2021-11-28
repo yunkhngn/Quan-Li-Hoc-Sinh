@@ -202,16 +202,14 @@ Export_button = Button(Input_frame, width = 10, text = "Export", command = Expor
 Export_button.grid(row=5,column=7,columnspan=2,padx=0,pady=5)
 
 Input_button = Button(Input_frame,width = 10, text = "Import",command= LoadData, font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2)
-Input_button.grid(row=6,column=7,columnspan=2,padx=5,pady=0)
+Input_button.grid(row=5,column=5,columnspan=2,padx=5,pady=0)
 
 Search_button = Button(Input_frame,width = 10, text = "Search", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command = deleteData)
-Search_button.grid(row=5,column=5,columnspan=2,padx=0,pady=5)
+Search_button.grid(row=5,column=2,columnspan=2,padx=0,pady=5)
 
 Clear_button = Button(Input_frame,width = 10, text = "Clear", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command = deleteData)
 Clear_button.grid(row=5,column=3,columnspan=3,padx=0,pady=5)
 
-Gethelp_button = Button(Input_frame,width = 10, text = "Get help?", font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2, command=openURL)
-Gethelp_button.grid(row=5,column=2,columnspan=2,padx=0,pady=5)
 
 #CopyRight Label
 copyRightLabel = Label(Input_frame)

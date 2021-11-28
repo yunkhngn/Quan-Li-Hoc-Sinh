@@ -140,6 +140,10 @@ def insertData():
     HocSinh[stt].tinhTrungBinh()
     tableData.insert(parent='',index='end',iid=stt,text='',
     values=(HocSinh[stt].stt, str(HocSinh[stt].name), HocSinh[stt].className, HocSinh[stt].age, HocSinh[stt].toan, HocSinh[stt].van, HocSinh[stt].anh, HocSinh[stt].tinhTrungBinh()))
+def exportTableToJson():
+    with open('data.json', 'w') as f:
+        json.dump(HocSinh, f)
+    
 
 tableData.grid(row=1, column=0, columnspan=5, rowspan=5, padx=5, pady=5)
         
@@ -177,9 +181,9 @@ anhEntry.grid(column = "7", row = "2", padx=0, pady=(7,0))
 anhEntry.config(text="Anh", font=("Segoe UI",12), relief=GROOVE, justify="center")
 
 #Row 3
-clearLabel = Button(screen, width= "7")
-clearLabel.grid(column = "0", row = "3", padx=(35,0), pady=(7,0))
-clearLabel.config(text="Clear", font=("Segoe UI",12), relief=GROOVE, justify="center")
+exportLabel = Button(screen, width= "7")
+exportLabel.grid(column = "0", row = "3", padx=(35,0), pady=(7,0))
+exportLabel.config(text="Clear", font=("Segoe UI",12), relief=GROOVE, justify="center", command=exportTableToJson)
 
 inputButton = Button(screen, width=7,)
 inputButton.grid(column = "1", row = "3", padx=0, pady=(7,0))

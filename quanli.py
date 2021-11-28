@@ -1,55 +1,20 @@
-#Đề: Quản lý học sinh
-#            tên 
-#           tuổi
-#          lớp 
-#            điểm toán, văn anh 
-#        fuc: tính điểm trung bình 
-#             tính năm sinh 
-
-import os
-# clearConsole = lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
-# clearConsole()
-# #Clear console cho nó gọn
-
 import datetime
 from tkinter import *
 from  tkinter import ttk
 from tkinter import messagebox
-import webbrowser
 import numpy
 import csv
 import tkinter.filedialog as filedialog
 
-class Students:
-    def __init__(self,stt, name, age, className, toan, van, anh):
-        self.stt = stt
-        self.name = name
-        self.age = age
-        self.className = className
-        self.toan = toan
-        self.van = van
-        self.anh = anh
-        
-    def tinhTrungBinh(self):
-        self.diemTrungBinh = (self.toan+self.van+self.anh)/3
-        return self.diemTrungBinh
-    
-    def tinhNamSinh(self):
-        x=datetime.datetime.now()
-        self.namSinh= x.year - self.age
-        return self.namSinh 
-
-
-HocSinh = []
-
 screen = Tk()
-screen.geometry("950x450")
+screen.geometry("950x500")
 screen. resizable(width=False, height=False)
-screen.title("Phần mềm quản lí học sinh trường L")
+screen.title(" Phần mềm quản lí học sinh trường L")
+screen.iconbitmap('icon.ico')
 
 #Row 0
 titleLabel = Label(screen)
-titleLabel.grid(columnspan = "13", row = "0", padx=5, pady=5)
+titleLabel.grid(columnspan = "13", row = "0", padx=5, pady=(5,0))
 titleLabel.config(text = "QUẢN LÍ HỌC SINH", font=("Segoe UI bold",15))
 
 #Table row 1
@@ -66,14 +31,14 @@ tableData['columns'] = ('stt', 'name', 'class', 'age', 'toan', 'van', 'anh', 'di
 tableData.grid(row=1, column=0, columnspan=5, rowspan=5, padx=5, pady=5)
 
 tableData.column("#0", width=0,  stretch=NO)
-tableData.column("stt",anchor=CENTER, width=70)
+tableData.column("stt",anchor=CENTER, width=78)
 tableData.column("name",anchor=CENTER, width=200)
 tableData.column("class",anchor=CENTER, width=100)
 tableData.column("age",anchor=CENTER, width=100)
 tableData.column("toan",anchor=CENTER, width=100)
 tableData.column("van",anchor=CENTER, width=100)
 tableData.column("anh",anchor=CENTER, width=100)
-tableData.column("diemTB",anchor=CENTER, width=100)
+tableData.column("diemTB",anchor=CENTER, width=110)
 
 
 tableData.heading("#0",text="",anchor=CENTER)
@@ -91,10 +56,6 @@ global count
 data = []
 count=0
 
-def openURL():
-    webbrowser.open_new(r"https://www.facebook.com/fb.khoanguyen")
-    messagebox.showinfo('Hỏi cl?', 'Hỏi gì? Hỏi cl tao đéo trả lời đâu!')
-
 def dtb():
     return round(float(float(toan_entry.get())+float(van_entry.get())+float(anh_entry.get()))/3, 2)
 
@@ -106,7 +67,6 @@ def inputData():
     count += 1
 
     data.append([stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()])
-    print(data)
 
     stt_entry.delete(0,END)
     name_entry.delete(0,END)
@@ -123,9 +83,8 @@ def ExportData():
 
     dataWithHeaders = data
     dataWithHeaders.insert(0, Headers)
-    print(dataWithHeaders)
     dataCSV = numpy.array(dataWithHeaders)
-    with open('data.csv', 'w', newline='') as file:
+    with open('Database/data.csv', 'w', newline='') as file:
         mywriter = csv.writer(file, delimiter=',')
         mywriter.writerows(dataCSV)
 
@@ -149,30 +108,30 @@ def deleteData():
     messagebox.askyesno('Ditmemay ấn cl', 'Cái này chưa code ấn cl à, code giúp tao với?')
 
 Input_frame = Frame(screen)
-Input_frame.grid(columnspan = "13", row = "2", padx=(20,0), pady=0)
+Input_frame.grid(columnspan = "13", row = "2", padx=(10,0), pady=0)
 
-menuLabel = Label(Input_frame, text = "Menu", font=("Segoe UI Bold",15))
+menuLabel = Label(Input_frame, text = "MENU", font=("Segoe UI Bold",15))
 menuLabel.grid(columnspan = "13", row = "2", padx=5, pady=5)
 
-stt = Label(Input_frame,text="STT")
+stt = Label(Input_frame,text="STT", font=("Segoe UI",10))
 stt.grid(row=3,column=0,padx=5,pady=0)
 
-name = Label(Input_frame,text="Tên")
+name = Label(Input_frame,text="Tên", font=("Segoe UI",10))
 name.grid(row=3,column=1,padx=5,pady=0)
 
-className = Label(Input_frame,text="Lớp")
+className = Label(Input_frame,text="Lớp", font=("Segoe UI",10))
 className.grid(row=3,column=2,padx=5,pady=0)
 
-age = Label(Input_frame,text="Tuổi")
+age = Label(Input_frame,text="Tuổi", font=("Segoe UI",10))
 age.grid(row=3,column=3,padx=5,pady=0)
 
-toan = Label(Input_frame,text="Điểm Toán")
+toan = Label(Input_frame,text="Điểm Toán", font=("Segoe UI",10))
 toan.grid(row=3,column=4,padx=5,pady=0)
 
-van = Label(Input_frame,text="Điểm Văn")
+van = Label(Input_frame,text="Điểm Văn", font=("Segoe UI",10))
 van.grid(row=3,column=5,padx=5,pady=0)
 
-anh = Label(Input_frame,text="Điểm Anh")
+anh = Label(Input_frame,text="Điểm Anh", font=("Segoe UI",10))
 anh.grid(row=3,column=6,padx=5,pady=0)
 
 stt_entry = Entry(Input_frame, borderwidth=2, width = "6", font=("Segoe UI",12), justify="center", relief="groove")
@@ -215,5 +174,5 @@ Clear_button.grid(row=5,column=3,columnspan=3,padx=0,pady=5)
 #CopyRight Label
 copyRightLabel = Label(Input_frame)
 copyRightLabel.grid(columnspan = "2", column = 0, row = "5", padx=(35,0), pady=(0,5))
-copyRightLabel.config(text="Copyright © Khoa Nguyễn & Quang Ngo! For educational purposes only!", font=("Segoe UI light",10),bd="0", relief=GROOVE, justify="center")
+copyRightLabel.config(text="Copyright © Khoa Nguyễn & Quang Ngo! For educational purposes only!", font=("Segoe UI light",9),bd="0", relief=GROOVE, justify="center")
 screen.mainloop()

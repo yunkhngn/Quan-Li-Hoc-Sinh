@@ -4,6 +4,7 @@ from  tkinter import ttk
 from tkinter import messagebox
 import numpy
 import csv
+import string
 import tkinter.filedialog as filedialog
 
 screen = Tk()
@@ -61,9 +62,11 @@ def dtb():
 
 def inputData():
     global count
+    tuoi = age_entry.get()
+    nameCheck = name_entry.get()
     if float(toan_entry.get()) >10 or float(van_entry.get()) >10 or float(anh_entry.get()) >10 or float(toan_entry.get()) <0 or float(van_entry.get()) <0 or float(anh_entry.get()) <0:
         messagebox.showerror('Lỗi', 'Điểm không hợp lệ')
-    elif is_integer(age_entry.get()) == False or int(age_entry.get()) < 0:
+    elif isinstance(tuoi,int) == False or int(tuoi) < 0:
         messagebox.showerror('Lỗi', 'Tuổi không hợp lệ')
     else:
         tableData.insert(parent='',index='end',iid = count,text='',values=(stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()))

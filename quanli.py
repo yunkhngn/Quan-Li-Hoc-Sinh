@@ -1,10 +1,8 @@
-import datetime
 from tkinter import *
 from  tkinter import ttk
 from tkinter import messagebox
 import numpy
 import csv
-import string
 import tkinter.filedialog as filedialog
 
 screen = Tk()
@@ -49,7 +47,7 @@ tableData.heading("van",text="Điểm Văn",anchor=CENTER)
 tableData.heading("anh",text="Điểm Anh",anchor=CENTER)
 tableData.heading("diemTB",text="Điểm TB",anchor=CENTER)
 
-
+#Function
 global count
 data = []
 count=0
@@ -119,6 +117,7 @@ def LoadData():
 def deleteData():
     messagebox.askyesno('Ditmemay ấn cl', 'Cái này chưa code ấn cl à, code giúp tao với?')
 
+#Row 2
 Input_frame = Frame(screen)
 Input_frame.grid(columnspan = "13", row = "2", padx=(25,0), pady=0)
 
@@ -131,6 +130,7 @@ searchLabel.grid(column=4, row = "2", padx=5, pady=5)
 searchEntry = Entry(Input_frame, width = "30", borderwidth=2, font=("Segoe UI",11), justify="center", relief="groove")
 searchEntry.grid(columnspan = "5",column=5, row = "2", padx=10, pady=5)
 
+#Row 3
 stt = Label(Input_frame,text="STT", font=("Segoe UI",10))
 stt.grid(row=3,column=0,padx=5,pady=0)
 
@@ -152,6 +152,7 @@ van.grid(row=3,column=5,padx=5,pady=0)
 anh = Label(Input_frame,text="Điểm Anh", font=("Segoe UI",10))
 anh.grid(row=3,column=6,padx=5,pady=0)
 
+#Row 4
 stt_entry = Entry(Input_frame, borderwidth=2, width = "6", font=("Segoe UI",12), justify="center", relief="groove")
 stt_entry.grid(row=4,column=0,padx=3,pady=0)
 
@@ -176,6 +177,7 @@ anh_entry.grid(row=4,column=6,padx=5,pady=0)
 Add_button = Button(Input_frame, text="Add", font=("Segoe UI",12), command=inputData, relief=GROOVE, justify="center", bd=2,width = 10)
 Add_button.grid(row=4,column=7,columnspan=2,padx=0,pady=5)
 
+#row 5
 Export_button = Button(Input_frame, width = 10, text = "Export", command = ExportData, font=("Segoe UI",12), relief=GROOVE, justify="center", bd=2)
 Export_button.grid(row=5,column=7,columnspan=2,padx=0,pady=5)
 

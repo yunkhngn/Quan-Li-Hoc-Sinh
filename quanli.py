@@ -61,20 +61,24 @@ def dtb():
 
 def inputData():
     global count
-   
-    tableData.insert(parent='',index='end',iid = count,text='',values=(stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()))
+    if float(toan_entry.get()) >10 or float(van_entry.get()) >10 or float(anh_entry.get()) >10 or float(toan_entry.get()) <0 or float(van_entry.get()) <0 or float(anh_entry.get()) <0:
+        messagebox.showerror('Lỗi', 'Điểm không hợp lệ')
+    elif is_integer(age_entry.get()) == False or int(age_entry.get()) < 0:
+        messagebox.showerror('Lỗi', 'Tuổi không hợp lệ')
+    else:
+        tableData.insert(parent='',index='end',iid = count,text='',values=(stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()))
     
-    count += 1
+        count += 1
 
-    data.append([stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()])
+        data.append([stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()])
 
-    stt_entry.delete(0,END)
-    name_entry.delete(0,END)
-    class_entry.delete(0,END)
-    age_entry.delete(0,END)
-    toan_entry.delete(0,END)
-    van_entry.delete(0,END)
-    anh_entry.delete(0,END)
+        stt_entry.delete(0,END)
+        name_entry.delete(0,END)
+        class_entry.delete(0,END)
+        age_entry.delete(0,END)
+        toan_entry.delete(0,END)
+        van_entry.delete(0,END)
+        anh_entry.delete(0,END)
 
 def ExportData():
     global data

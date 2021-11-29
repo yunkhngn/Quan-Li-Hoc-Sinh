@@ -8,7 +8,7 @@ import string
 import tkinter.filedialog as filedialog
 
 screen = Tk()
-screen.geometry("950x500")
+screen.geometry("950x470")
 screen. resizable(width=False, height=False)
 screen.title(" Phần mềm quản lí học sinh trường L")
 screen.iconbitmap('icon.ico')
@@ -21,10 +21,7 @@ titleLabel.config(text = "QUẢN LÍ HỌC SINH", font=("Segoe UI bold",15))
 #Table row 1
 
 table_frame = Frame(screen)
-table_frame.grid(columnspan = "13", row = "1", padx=(30,0), pady=5)
-
-tableScroll = Scrollbar(table_frame)
-tableScroll.grid(row = "1", column = "8", sticky = "nsew")
+table_frame.grid(columnspan = "13", row = "1", padx=(23,0), pady=5)
 
 tableData = ttk.Treeview(table_frame)
 
@@ -60,14 +57,22 @@ count=0
 def dtb():
     return round(float(float(toan_entry.get())+float(van_entry.get())+float(anh_entry.get()))/3, 2)
 
+def checkIfStringIncludeANumber(string):
+    for i in range(len(string)):
+        if string[i].isdigit():
+            return True
+    return False
+
 def inputData():
     global count
     tuoi = age_entry.get()
-    nameCheck = name_entry.get()
+    nameCheck = str(name_entry.get())
     if float(toan_entry.get()) >10 or float(van_entry.get()) >10 or float(anh_entry.get()) >10 or float(toan_entry.get()) <0 or float(van_entry.get()) <0 or float(anh_entry.get()) <0:
         messagebox.showerror('Lỗi', 'Điểm không hợp lệ')
-    elif isinstance(tuoi,int) == False or int(tuoi) < 0:
+    elif age_entry.get().isdigit() == False or int(tuoi) < 0 or int(tuoi) > 50:
         messagebox.showerror('Lỗi', 'Tuổi không hợp lệ')
+    elif name_entry.get().isdigit() == True or len(nameCheck) < 2 or checkIfStringIncludeANumber(nameCheck) == True:
+        messagebox.showerror('Lỗi', 'Tên không hợp lệ')
     else:
         tableData.insert(parent='',index='end',iid = count,text='',values=(stt_entry.get(), name_entry.get(), class_entry.get(), age_entry.get(), toan_entry.get(), van_entry.get(), anh_entry.get(), dtb()))
     
@@ -115,10 +120,16 @@ def deleteData():
     messagebox.askyesno('Ditmemay ấn cl', 'Cái này chưa code ấn cl à, code giúp tao với?')
 
 Input_frame = Frame(screen)
-Input_frame.grid(columnspan = "13", row = "2", padx=(10,0), pady=0)
+Input_frame.grid(columnspan = "13", row = "2", padx=(25,0), pady=0)
 
 menuLabel = Label(Input_frame, text = "MENU", font=("Segoe UI Bold",15))
-menuLabel.grid(columnspan = "13", row = "2", padx=5, pady=5)
+menuLabel.grid(columnspan = "4",column=1, row = "2", padx=5, pady=5)
+
+searchLabel = Label(Input_frame, text = "Tìm kiếm", font=("Segoe UI",12))
+searchLabel.grid(column=4, row = "2", padx=5, pady=5)
+
+searchEntry = Entry(Input_frame, width = "30", borderwidth=2, font=("Segoe UI",11), justify="center", relief="groove")
+searchEntry.grid(columnspan = "5",column=5, row = "2", padx=10, pady=5)
 
 stt = Label(Input_frame,text="STT", font=("Segoe UI",10))
 stt.grid(row=3,column=0,padx=5,pady=0)
